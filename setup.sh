@@ -77,44 +77,6 @@ fi
 # --------------------------------------------
 PROFILE_FILE="$HOME/dotfiles/.zshrc"
 
-# Add Powerlevel10k theme and fzf keybindings to .zshrc if not already present
-if ! grep -q "Powerlevel10k theme" "$PROFILE_FILE" 2>/dev/null; then
-    {
-        echo ""
-        echo "# Powerlevel10k theme"
-        echo "if [[ -f \"$P10K_THEME\" ]]; then"
-        echo "  source \"$P10K_THEME\""
-        echo "fi"
-        echo ""
-        echo "# To customize prompt, run \`p10k configure\` or edit \$HOME/.p10k.zsh"
-        echo "[[ -f \$HOME/.p10k.zsh ]] && source \$HOME/.p10k.zsh"
-        echo ""
-        echo "# fzf keybindings"
-        echo "if [[ -f $FZF_FILE ]]; then"
-        echo "    source $FZF_FILE"
-        echo "fi"
-    } >> "$PROFILE_FILE"
-    echo "✅ Added Powerlevel10k and fzf settings to $PROFILE_FILE"
-else
-    echo "ℹ️ Powerlevel10k and fzf settings already present in $PROFILE_FILE (skipping)."
-fi
-
-# --------------------------------------------
-# Add sourcing of ~/.bash_secrets to .zshrc if not already present
-# --------------------------------------------
-if ! grep -q "source ~/.bash_secrets" "$PROFILE_FILE" 2>/dev/null; then
-    {
-        echo ""
-        echo "# Load private bash secrets"
-        echo "if [[ -f \"\$HOME/.bash_secrets\" ]]; then"
-        echo "  source \"\$HOME/.bash_secrets\""
-        echo "fi"
-    } >> "$PROFILE_FILE"
-    echo "✅ Added ~/.bash_secrets sourcing to $PROFILE_FILE"
-else
-    echo "ℹ️ ~/.bash_secrets already sourced in $PROFILE_FILE (skipping)."
-fi
-
 # --------------------------------------------
 # Symlink ~/.zshrc to dotfiles/.zshrc
 # --------------------------------------------
