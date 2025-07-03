@@ -16,3 +16,13 @@ fi
 if [[ -f "$HOME/.bash_secrets" ]]; then
   source "$HOME/.bash_secrets"
 fi
+
+# Load aliases
+if [[ -f "$HOME/dotfiles/.aliases" ]]; then
+  source "$HOME/dotfiles/.aliases"
+fi
+
+# Load dandy specific configurations
+if [[ -f "$HOME/dotfiles/.zshrc_dandy" ]]; then
+  source "$HOME/dotfiles/.zshrc_dandy"
+fi
