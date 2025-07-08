@@ -73,6 +73,35 @@ else
 fi
 
 # --------------------------------------------
+# Install and configure nvm with default Node.js version
+# --------------------------------------------
+NVM_DIR="$HOME/.nvm"
+if [[ ! -d "$NVM_DIR" ]]; then
+    echo "📦 Installing nvm..."
+    if command -v curl >/dev/null 2>&1; then
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+        echo "✅ nvm installed successfully."
+    else
+        echo "⚠️ curl not found. Please install nvm manually:"
+        echo "    https://github.com/nvm-sh/nvm#installing-and-updating"
+    fi
+fi
+
+# Load nvm in current session
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# Always install and set Node.js 18 LTS as default
+if ! nvm list 18 | grep -q 'v18'; then
+    echo "📦 Installing Node.js 18 LTS..."
+    nvm install 18
+fi
+nvm use 18
+nvm alias default 18
+echo "✅ Node.js 18 LTS installed and set as default."
+
+# --------------------------------------------
 # Make changes permanent in local .zshrc
 # --------------------------------------------
 PROFILE_FILE="$HOME/dotfiles/.zshrc"
